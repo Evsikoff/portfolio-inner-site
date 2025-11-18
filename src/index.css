@@ -38,6 +38,14 @@ code {
     src: url(./assets/fonts/Terminal.ttf);
 }
 
+@font-face {
+    font-family: PixelifySans;
+    src: url(./assets/fonts/PixelifySans-VariableFont_wght.ttf) format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 
 * {
     -webkit-touch-callout: none;
@@ -253,6 +261,28 @@ input:active {
     overflow: hidden;
     transform: translate3d(0, 0, 0);
     overflow: hidden;
+}
+
+.showcase-font {
+    font-family: PixelifySans, sans-serif;
+}
+
+.showcase-font p,
+.showcase-font h1,
+.showcase-font h2,
+.showcase-font h3,
+.showcase-font h4,
+.showcase-font h5,
+.showcase-font h6,
+.showcase-font li,
+.showcase-font a,
+.showcase-font span,
+.showcase-font button,
+.showcase-font input,
+.showcase-font textarea,
+.showcase-font code,
+.showcase-font pre {
+    font-family: PixelifySans, sans-serif;
 }
 
 .site-page-content {

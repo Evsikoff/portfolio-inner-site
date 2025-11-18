@@ -141,13 +141,13 @@ const styles: StyleSheetCSS = {
     code: {
         backgroundColor: '#e0e0e0',
         padding: '2px 6px',
-        fontFamily: 'monospace',
+        fontFamily: 'PixelifySans, monospace',
         fontSize: 14,
     },
     codeBlock: {
         backgroundColor: '#e0e0e0',
         padding: 12,
-        fontFamily: 'monospace',
+        fontFamily: 'PixelifySans, monospace',
         fontSize: 14,
         overflow: 'auto',
         marginTop: 8,
