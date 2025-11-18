@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import HomeIcon from '../../general/HomeIcon';
 
 const CMP: React.FC = () => {
     const navigate = useNavigate();
@@ -68,7 +69,7 @@ const CMP: React.FC = () => {
 
             <div style={styles.homeButtonContainer}>
                 <button className="site-button" style={styles.homeButton} onClick={goHome} title="На главную">
-                    🏠
+                    <HomeIcon size={24} />
                 </button>
             </div>
         </div>
@@ -81,7 +82,7 @@ const styles: StyleSheetCSS = {
     resumeContainer: { marginTop: 48, textAlign: 'center' },
     resumeLink: { padding: 16, fontSize: 18, textDecoration: 'underline', cursor: 'pointer' },
     homeButtonContainer: { marginTop: 32, marginBottom: 32, display: 'flex', justifyContent: 'center' },
-    homeButton: { fontSize: 32, padding: 12, minWidth: 64, cursor: 'pointer' },
+    homeButton: { padding: 12, minWidth: 64, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
 };
 
 export default CMP;

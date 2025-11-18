@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import HomeIcon from '../general/HomeIcon';
 
 export interface ProjectsProps {}
 
@@ -42,7 +43,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
                     onClick={goHome}
                     title="На главную"
                 >
-                    🏠
+                    <HomeIcon size={24} />
                 </button>
             </div>
         </div>
@@ -73,10 +74,12 @@ const styles: StyleSheetCSS = {
         justifyContent: 'center',
     },
     homeButton: {
-        fontSize: 32,
         padding: 12,
         minWidth: 64,
         cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 };
 

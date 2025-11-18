@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HomeIcon from '../general/HomeIcon';
 
 export interface AboutProps {}
 
 const About: React.FC<AboutProps> = (props) => {
     const navigate = useNavigate();
     const [photoSrc, setPhotoSrc] = useState<string | null>(null);
+
+    const goHome = () => {
+        navigate('/');
+    };
 
     useEffect(() => {
         // Попытка динамически импортировать фото
@@ -63,6 +68,16 @@ const About: React.FC<AboutProps> = (props) => {
                     Резюме
                 </a>
             </div>
+            <div style={styles.homeButtonContainer}>
+                <button
+                    className="site-button"
+                    style={styles.homeButton}
+                    onClick={goHome}
+                    title="На главную"
+                >
+                    <HomeIcon size={24} />
+                </button>
+            </div>
         </div>
     );
 };
@@ -100,6 +115,19 @@ const styles: StyleSheetCSS = {
         fontSize: 18,
         textDecoration: 'underline',
         cursor: 'pointer',
+    },
+    homeButtonContainer: {
+        marginTop: 32,
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    homeButton: {
+        padding: 12,
+        minWidth: 64,
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 };
 
