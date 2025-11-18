@@ -1,44 +1,33 @@
 import React from 'react';
 import { Link } from '../general';
 
-import forhire from '../../assets/pictures/forHireGif.gif';
-import { useNavigate } from 'react-router';
-
 export interface HomeProps {}
 
-const Home: React.FC<HomeProps> = (props) => {
-    const navigate = useNavigate();
-
-    const goToContact = () => {
-        navigate('/contact');
+const Home: React.FC<HomeProps> = () => {
+    const goToResume = () => {
+        window.open(
+            'https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing',
+            '_blank'
+        );
     };
 
     return (
         <div style={styles.page}>
             <div style={styles.header}>
-                <h1 style={styles.name}>Andrey Evsikov</h1>
-                <h2>System Analyst</h2>
+                <h1 style={styles.name}>Евсиков Андрей</h1>
+                <h2>Системный аналитик</h2>
             </div>
             <div style={styles.buttons}>
-                <Link containerStyle={styles.link} to="about" text="ABOUT" />
-                <Link
-                    containerStyle={styles.link}
-                    to="experience"
-                    text="EXPERIENCE"
-                />
-                <Link
-                    containerStyle={styles.link}
-                    to="projects"
-                    text="PROJECTS"
-                />
-                <Link
-                    containerStyle={styles.link}
-                    to="contact"
-                    text="CONTACT"
-                />
+                <Link containerStyle={styles.link} to="about" text="Обо мне" />
+                <Link containerStyle={styles.link} to="experience" text="Опыт" />
+                <Link containerStyle={styles.link} to="certificates" text="Дипломы и сертификаты" />
+                <Link containerStyle={styles.link} to="pets" text="Pet-проекты" />
+                <Link containerStyle={styles.link} to="contact" text="Контакты" />
             </div>
-            <div style={styles.forHireContainer} onMouseDown={goToContact}>
-                {/* <img src={forhire} alt="" /> */}
+            <div style={styles.resumeContainer}>
+                <button style={styles.resumeButton} onMouseDown={goToResume}>
+                    Резюме
+                </button>
             </div>
         </div>
     );
@@ -66,28 +55,31 @@ const styles: StyleSheetCSS = {
     },
     buttons: {
         justifyContent: 'space-between',
-    },
-    image: {
-        width: 800,
+        gap: 12,
+        flexWrap: 'wrap',
+        display: 'flex',
+        maxWidth: 640,
+        alignItems: 'center',
+        justifySelf: 'center',
     },
     link: {
-        padding: 16,
-    },
-    nowHiring: {
-        backgroundColor: 'red',
-        padding: 16,
-    },
-    forHireContainer: {
-        marginTop: 64,
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer',
+        padding: 12,
     },
     name: {
         fontSize: 72,
         marginBottom: 16,
         lineHeight: 0.9,
+    },
+    resumeContainer: {
+        marginTop: 48,
+    },
+    resumeButton: {
+        padding: '12px 18px',
+        borderRadius: 8,
+        border: '2px solid #2b2b2b',
+        background: 'white',
+        cursor: 'pointer',
+        fontSize: 18,
     },
 };
 

@@ -1,89 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from '../general';
-import forHire from '../../assets/pictures/forHireGif.gif';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 export interface VerticalNavbarProps {}
 
-const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
+const VerticalNavbar: React.FC<VerticalNavbarProps> = () => {
     const location = useLocation();
-    const [projectsExpanded, setProjectsExpanded] = useState(false);
     const [isHome, setIsHome] = useState(false);
 
-    const navigate = useNavigate();
-    const goToContact = () => {
-        navigate('/contact');
-    };
-
     useEffect(() => {
-        if (location.pathname.includes('/projects')) {
-            setProjectsExpanded(true);
-        } else {
-            setProjectsExpanded(false);
-        }
-        if (location.pathname === '/') {
-            setIsHome(true);
-        } else {
-            setIsHome(false);
-        }
+        setIsHome(location.pathname === '/');
         return () => {};
     }, [location.pathname]);
 
     return !isHome ? (
         <div style={styles.navbar}>
             <div style={styles.header}>
-                <h1 style={styles.headerText}>Andrey</h1>
-                <h1 style={styles.headerText}>Evsikov</h1>
-                <h3 style={styles.headerShowcase}>Resume</h3>
+                <h1 style={styles.headerText}>Евсиков</h1>
+                <h1 style={styles.headerText}>Андрей</h1>
+                <h3 style={styles.headerShowcase}>Системный аналитик</h3>
             </div>
             <div style={styles.links}>
-                <Link containerStyle={styles.link} to="" text="HOME" />
-                <Link containerStyle={styles.link} to="about" text="ABOUT" />
-                <Link
-                    containerStyle={styles.link}
-                    to="experience"
-                    text="EXPERIENCE"
-                />
-                <Link
-                    containerStyle={Object.assign(
-                        {},
-                        styles.link,
-                        projectsExpanded && styles.expandedLink
-                    )}
-                    to="projects"
-                    text="PROJECTS"
-                />
-                {
-                    // if current path contains projects
-                    projectsExpanded && (
-                        <div style={styles.insetLinks}>
-                            <Link
-                                containerStyle={styles.insetLink}
-                                to="projects/software"
-                                text="SOFTWARE"
-                            />
-                            <Link
-                                containerStyle={styles.insetLink}
-                                to="projects/music"
-                                text="MUSIC"
-                            />
-                            <Link
-                                containerStyle={styles.insetLink}
-                                to="projects/art"
-                                text="ART"
-                            />
-                        </div>
-                    )
-                }
-                <Link
-                    containerStyle={styles.link}
-                    to="contact"
-                    text="CONTACT"
-                />
-            </div>
-            <div style={styles.spacer} />
-            <div style={styles.forHireContainer} onMouseDown={goToContact}>
-                {/* <img src={forHire} style={styles.image} alt="" /> */}
+                <Link containerStyle={styles.link} to="" text="Старт" />
+                <Link containerStyle={styles.link} to="about" text="Обо мне" />
+                <Link containerStyle={styles.link} to="experience" text="Опыт" />
+                <Link containerStyle={styles.link} to="certificates" text="Дипломы и сертификаты" />
+                <Link containerStyle={styles.link} to="pets" text="Pet-проекты" />
+                <Link containerStyle={styles.link} to="contact" text="Контакты" />
             </div>
         </div>
     ) : (
@@ -112,39 +55,13 @@ const styles: StyleSheetCSS = {
     headerShowcase: {
         marginTop: 12,
     },
-    logo: {
-        width: '100%',
-        marginBottom: 8,
-    },
     link: {
-        marginBottom: 32,
-    },
-    expandedLink: {
-        marginBottom: 16,
-    },
-    insetLinks: {
-        flexDirection: 'column',
-        marginLeft: 32,
-        marginBottom: 16,
-    },
-    insetLink: {
-        marginBottom: 8,
+        marginBottom: 28,
     },
     links: {
         flexDirection: 'column',
         flex: 1,
         justifyContent: 'center',
-    },
-    image: {
-        width: '80%',
-    },
-    spacer: {
-        flex: 1,
-    },
-    forHireContainer: {
-        cursor: 'pointer',
-
-        width: '100%',
     },
 };
 

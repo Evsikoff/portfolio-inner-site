@@ -4,11 +4,9 @@ import Home from '../showcase/Home';
 import About from '../showcase/About';
 import Window from '../os/Window';
 import Experience from '../showcase/Experience';
-import Projects from '../showcase/Projects';
+import PetProjects from '../showcase/Projects';
 import Contact from '../showcase/Contact';
-import SoftwareProjects from '../showcase/projects/Software';
-import MusicProjects from '../showcase/projects/Music';
-import ArtProjects from '../showcase/projects/Art';
+import Certificates from '../showcase/Certificates';
 import VerticalNavbar from '../showcase/VerticalNavbar';
 import useInitialWindowSize from '../../hooks/useInitialWindowSize';
 
@@ -23,7 +21,7 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
             left={56}
             width={initWidth}
             height={initHeight}
-            windowTitle="Andrey Evsikov - About me"
+            windowTitle="Andrey Evsikov - Portfolio"
             windowBarIcon="windowExplorerIcon"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
@@ -37,17 +35,9 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/experience" element={<Experience />} />
-                        <Route path="/projects" element={<Projects />} />
+                        <Route path="/certificates" element={<Certificates />} />
+                        <Route path="/pets" element={<PetProjects />} />
                         <Route path="/contact" element={<Contact />} />
-                        <Route
-                            path="/projects/software"
-                            element={<SoftwareProjects />}
-                        />
-                        <Route
-                            path="/projects/music"
-                            element={<MusicProjects />}
-                        />
-                        <Route path="/projects/art" element={<ArtProjects />} />
                     </Routes>
                 </div>
             </Router>

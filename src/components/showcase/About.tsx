@@ -1,187 +1,83 @@
 import React from 'react';
-import me from '../../assets/pictures/workingAtComputer.jpg';
-import meNow from '../../assets/pictures/currentme.jpg';
-import { Link } from 'react-router-dom';
-import ResumeDownload from './ResumeDownload';
+import portrait from '../../assets/pictures/evsikov/unnamed (6).jpg';
+import { useNavigate } from 'react-router';
 
 export interface AboutProps {}
 
-const About: React.FC<AboutProps> = (props) => {
-    return (
-        // add on resize listener
-        <div className="site-page-content">
-            {/* <img src={me} style={styles.topImage} alt="" /> */}
-            <h1 style={{ marginLeft: -16 }}>Welcome</h1>
-            <h3>I'm Andrey Evsikov</h3>
-            <br />
-            <div className="text-block">
-                <p>
-                    I'm a System Analyst currently working at Vercel! In May
-                    of 2025 I graduated from Rensselaer Polytechnic Institute
-                    with my BS in Computer Science.
-                </p>
-                <br />
-                <p>
-                    Thank you for taking the time to check out my portfolio. I
-                    really hope you enjoy exploring it as much as I enjoyed
-                    building it. If you have any questions or comments, feel
-                    free to contact me using{' '}
-                    <Link to="/contact">this form</Link> or shoot me an email at{' '}
-                    <a href="mailto:AndreyEvsikov@gmail.com">
-                        AndreyEvsikov@gmail.com
-                    </a>
-                </p>
-            </div>
-            <ResumeDownload />
-            <div className="text-block">
-                <h3>About Me</h3>
-                <br />
-                <p>
-                    From a young age, I have had a curiosity about how things
-                    worked. This naturally led me to become absolutely obsessed
-                    with Lego and I fell in love with building things. In
-                    elementary school, I joined the Lego Robotics team at my
-                    local middle school, which was my first real exposure to
-                    programming. In 2008, my family and I moved across the
-                    country from California to New York, where I attended middle
-                    school, high school, and college.
-                </p>
-                <br />
-                <div className="captioned-image">
-                    <img src={me} style={styles.image} alt="" />
-                    <p>
-                        <sub>
-                            <b>Figure 1:</b> A real photo of me developing this
-                            website :)
-                        </sub>
-                    </p>
-                </div>
+const About: React.FC<AboutProps> = () => {
+    const navigate = useNavigate();
 
-                <p>
-                    I started programming more seriously in high school,
-                    initially learning how to scrape and interact with websites.
-                    I went on to do a ton of passion projects, many of them with
-                    one of my closest friends,{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://www.linkedin.com/in/scott-bass-189a7919b/"
-                    >
-                        Scott Bass
-                    </a>
-                    . We worked on many projects together, including chat bots,
-                    multiple game projects, apps, and more. One of these
-                    projects is viewable on my{' '}
-                    <Link to="/projects/software">Software Projects</Link> page.
-                </p>
-                <br />
-                <p>
-                    In 2017, I got accepted into Rennselear Polytechnic
-                    Institute to study Computer Science. It was my first choice
-                    and I was absolutely ecstatic to be going to such a great
-                    university. At the end of my sophomore year, I got an
-                    internship working for the startup Hover, primarily focusing
-                    on frontend work. I continued to work at Hover on and off
-                    for about a year and a half, until the start of my senior
-                    year when I decided to focus on other opportunities.
-                </p>
-                <br />
-                <br />
-                <div style={{}}>
-                    <div
-                        style={{
-                            flex: 1,
-                            textAlign: 'justify',
-                            alignSelf: 'center',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <h3>My Hobbies</h3>
-                        <br />
-                        <p>
-                            Beyond software, I have a lot of hobbies that I
-                            enjoy doing in my free time. The more tangible
-                            hobbies I have are{' '}
-                            <Link to="/projects/music">Music Production</Link>{' '}
-                            and creating{' '}
-                            <Link to="/projects/art">Digital Art</Link>. You can
-                            read more about each of these on their respective
-                            pages under my projects tab. Some other hobbies I
-                            enjoy are working out, cooking, and (unsurprisingly)
-                            playing video games.
-                        </p>
-                        <br />
-                        <p>
-                            In college, I was an active member in the fraternity
-                            Sigma Alpha Epsilon and held multiple positions in
-                            the chapter. I met a lot of amazing people through
-                            my fraternity and thoroughly enjoyed the community.
-                        </p>
-                    </div>
-                    <div style={styles.verticalImage}>
-                        <img src={meNow} style={styles.image} alt="" />
-                        <p>
-                            <sub>
-                                <b>Figure 2:</b> Me, April 2025
-                            </sub>
-                        </p>
-                    </div>
+    return (
+        <div className="site-page-content">
+            <div style={styles.headerRow}>
+                <h1>Обо мне</h1>
+                <button style={styles.homeButton} onMouseDown={() => navigate('/')}>🏠</button>
+            </div>
+            <div className="text-block" style={styles.introBlock}>
+                <div style={styles.portraitContainer}>
+                    <img src={portrait} alt="Евсиков Андрей" style={styles.portrait} />
                 </div>
-                <br />
-                <br />
-                <p>
-                    Thanks for reading about me! I hope that you enjoy exploring
-                    the rest of my portfolio website and everything it has to
-                    offer. If you find the easter egg make sure to let me know
-                    on twitter{' '}
+                <div style={styles.textColumn}>
+                    <p>
+                        Системный аналитик с архитектурным мышлением и опытом полного цикла разработки корпоративных систем — от идеи и формализации требований до архитектуры, интеграций и ввода в промышленную эксплуатацию.
+                    </p>
+                    <br />
+                    <p>
+                        Развиваю профиль технического аналитика/полу-разработчика, умею писать рабочий backend-код (Nest.js, PostgreSQL, Python), эффективно анализировать API, транзакции, интеграции и проектировать сложные модели данных.
+                    </p>
+                    <br />
+                    <p>
+                        Одновременно расту как продуктовый специалист, уделяя внимание ценности фичей, пользовательскому сценарию, влиянию на метрики и устойчивости продукта.
+                    </p>
+                    <br />
                     <a
                         rel="noreferrer"
                         target="_blank"
-                        href="https://twitter.com/AndreyEvsikov"
+                        href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
                     >
-                        @AndreyEvsikov
-                    </a>{' '}
-                    Good luck and have fun!
-                </p>
-                <br />
-                <p>
-                    If you have any questions or comments I would love to hear
-                    them. You can reach me through the{' '}
-                    <Link to="/contact">contact page</Link> or shoot me an email
-                    at{' '}
-                    <a href="mailto:AndreyEvsikov@gmail.com">
-                        AndreyEvsikov@gmail.com
+                        Резюме
                     </a>
-                </p>
+                </div>
             </div>
         </div>
     );
 };
 
 const styles: StyleSheetCSS = {
-    contentHeader: {
-        marginBottom: 16,
-        fontSize: 48,
-    },
-    image: {
-        height: 'auto',
-        width: '100%',
-    },
-    topImage: {
-        height: 'auto',
-        width: '100%',
-        marginBottom: 32,
-    },
-    verticalImage: {
-        alignSelf: 'center',
-        // width: '80%',
-        marginLeft: 32,
-        flex: 0.8,
-
+    headerRow: {
+        display: 'flex',
         alignItems: 'center',
-        // marginBottom: 32,
-        textAlign: 'center',
-        flexDirection: 'column',
+        justifyContent: 'space-between',
+        gap: 16,
+    },
+    introBlock: {
+        display: 'flex',
+        gap: 32,
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    },
+    portraitContainer: {
+        maxWidth: 320,
+        flex: '1 1 240px',
+    },
+    portrait: {
+        width: '100%',
+        height: 'auto',
+        objectFit: 'cover',
+        borderRadius: 12,
+        boxShadow: '0 4px 18px rgba(0,0,0,0.12)',
+    },
+    textColumn: {
+        flex: '2 1 300px',
+    },
+    homeButton: {
+        width: 48,
+        height: 48,
+        borderRadius: 8,
+        border: '2px solid #2b2b2b',
+        background: 'white',
+        cursor: 'pointer',
+        fontSize: 24,
     },
 };
 
