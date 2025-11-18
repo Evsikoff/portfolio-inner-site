@@ -17,7 +17,7 @@ const About: React.FC<AboutProps> = (props) => {
             <div className="text-block">
                 <p>
                     I'm a System Analyst currently working at Vercel! In May
-                    of 2022 I graduated from Rensselaer Polytechnic Institute
+                    of 2025 I graduated from Rensselaer Polytechnic Institute
                     with my BS in Computer Science.
                 </p>
                 <br />
@@ -122,7 +122,7 @@ const About: React.FC<AboutProps> = (props) => {
                         <img src={meNow} style={styles.image} alt="" />
                         <p>
                             <sub>
-                                <b>Figure 2:</b> Me, April 2022
+                                <b>Figure 2:</b> Me, April 2025
                             </sub>
                         </p>
                     </div>
