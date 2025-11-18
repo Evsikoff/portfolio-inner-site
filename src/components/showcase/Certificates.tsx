@@ -40,9 +40,7 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
 
     useEffect(() => {
         const loadImages = async () => {
-            const images: Array<{ src: string; name: string; width: number; height: number }> = [];
-
-            for (const fileName of CERTIFICATE_FILES) {
+            const loadImage = async (fileName: string) => {
                 try {
                     const image = await import(`../../assets/pictures/evsikov/${fileName}`);
 
@@ -55,14 +53,19 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
                     });
 
                     if (dimensions) {
-                        images.push({ src: image.default, name: fileName, ...dimensions });
+                        return { src: image.default, name: fileName, ...dimensions };
                     }
+
+                    return null;
                 } catch (error) {
                     console.warn(`Could not load image: ${fileName}`);
+                    return null;
                 }
-            }
+            };
 
-            setLoadedImages(images);
+            const images = await Promise.all(CERTIFICATE_FILES.map((fileName) => loadImage(fileName)));
+
+            setLoadedImages(images.filter(Boolean) as Array<{ src: string; name: string; width: number; height: number }>);
             setIsLoading(false);
         };
 
