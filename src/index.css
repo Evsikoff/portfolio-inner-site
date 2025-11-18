@@ -58,12 +58,12 @@ h6 {
 }
 
 p {
-    font-family: Millennium, 'Times New Roman', Times, serif;
+    font-family: Millennium, 'Times New Roman', Times, Arial, serif;
     font-size: 18px;
 }
 
 p b {
-    font-family: MillenniumBold, 'Times New Roman', Times, serif;
+    font-family: MillenniumBold, 'Times New Roman', Times, Arial, serif;
 }
 
 .showcase-header {
@@ -84,18 +84,18 @@ h1 {
 }
 
 h2 {
-    font-family: MillenniumBold, 'Times New Roman', Times, serif;
+    font-family: MillenniumBold, 'Times New Roman', Times, Arial, serif;
     font-size: 32px;
 }
 
 h3 {
-    font-family: MillenniumBold, 'Times New Roman', Times, serif;
+    font-family: MillenniumBold, 'Times New Roman', Times, Arial, serif;
     font-size: 24px;
     letter-spacing: 0px;
 }
 
 h4 {
-    font-family: MillenniumBold, 'Times New Roman', Times, serif;
+    font-family: MillenniumBold, 'Times New Roman', Times, Arial, serif;
     font-size: 18px;
     letter-spacing: 0px;
 }

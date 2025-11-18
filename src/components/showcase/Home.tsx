@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from '../general';
-
-import forhire from '../../assets/pictures/forHireGif.gif';
 import { useNavigate } from 'react-router';
 
 export interface HomeProps {}
@@ -9,36 +7,44 @@ export interface HomeProps {}
 const Home: React.FC<HomeProps> = (props) => {
     const navigate = useNavigate();
 
-    const goToContact = () => {
-        navigate('/contact');
-    };
-
     return (
         <div style={styles.page}>
             <div style={styles.header}>
-                <h1 style={styles.name}>Andrey Evsikov</h1>
-                <h2>System Analyst</h2>
+                <h1 style={styles.name}>Евсиков Андрей</h1>
+                <h2>Системный аналитик</h2>
             </div>
             <div style={styles.buttons}>
-                <Link containerStyle={styles.link} to="about" text="ABOUT" />
+                <Link containerStyle={styles.link} to="about" text="1. Обо мне" />
                 <Link
                     containerStyle={styles.link}
                     to="experience"
-                    text="EXPERIENCE"
+                    text="2. Опыт"
+                />
+                <Link
+                    containerStyle={styles.link}
+                    to="certificates"
+                    text="3. Дипломы и сертификаты"
                 />
                 <Link
                     containerStyle={styles.link}
                     to="projects"
-                    text="PROJECTS"
+                    text="4. Pet-проекты"
                 />
                 <Link
                     containerStyle={styles.link}
                     to="contact"
-                    text="CONTACT"
+                    text="5. Контакты"
                 />
             </div>
-            <div style={styles.forHireContainer} onMouseDown={goToContact}>
-                {/* <img src={forhire} alt="" /> */}
+            <div style={styles.resumeLink}>
+                <a
+                    href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={styles.link}
+                >
+                    Резюме
+                </a>
             </div>
         </div>
     );
@@ -66,6 +72,8 @@ const styles: StyleSheetCSS = {
     },
     buttons: {
         justifyContent: 'space-between',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     image: {
         width: 800,
@@ -73,16 +81,9 @@ const styles: StyleSheetCSS = {
     link: {
         padding: 16,
     },
-    nowHiring: {
-        backgroundColor: 'red',
-        padding: 16,
-    },
-    forHireContainer: {
-        marginTop: 64,
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer',
+    resumeLink: {
+        marginTop: 48,
+        textAlign: 'center',
     },
     name: {
         fontSize: 72,
