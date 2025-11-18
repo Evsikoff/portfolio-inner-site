@@ -57,7 +57,7 @@ const Contact: React.FC<ContactProps> = (props) => {
         try {
             setIsLoading(true);
             const res = await fetch(
-                'https://api.henryheffernan.com/api/contact',
+                'https://api.AndreyEvsikov.com/api/contact',
                 {
                     method: 'POST',
                     headers: {
@@ -116,15 +116,15 @@ const Contact: React.FC<ContactProps> = (props) => {
                 <div style={styles.socials}>
                     <SocialBox
                         icon={ghIcon}
-                        link={'https://github.com/henryjeff'}
+                        link={'https://github.com/Andreyjeff'}
                     />
                     <SocialBox
                         icon={inIcon}
-                        link={'https://www.linkedin.com/in/henryheffernan/'}
+                        link={'https://www.linkedin.com/in/AndreyEvsikov/'}
                     />
                     <SocialBox
                         icon={twitterIcon}
-                        link={'https://twitter.com/henryheffernan'}
+                        link={'https://twitter.com/AndreyEvsikov'}
                     />
                 </div>
             </div>
@@ -138,8 +138,8 @@ const Contact: React.FC<ContactProps> = (props) => {
                 <br />
                 <p>
                     <b>Email: </b>
-                    <a href="mailto:henryheffernan@gmail.com">
-                        henryheffernan@gmail.com
+                    <a href="mailto:AndreyEvsikov@gmail.com">
+                        AndreyEvsikov@gmail.com
                     </a>
                 </p>
 
