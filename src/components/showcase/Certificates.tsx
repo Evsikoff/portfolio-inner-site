@@ -36,6 +36,7 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
     const [loadedImages, setLoadedImages] = useState<
         Array<{ src: string; name: string; width: number; height: number }>
     >([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const loadImages = async () => {
@@ -62,10 +63,13 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
             }
 
             setLoadedImages(images);
+            setIsLoading(false);
         };
 
         if (CERTIFICATE_FILES.length > 0) {
             loadImages();
+        } else {
+            setIsLoading(false);
         }
     }, []);
 
@@ -77,7 +81,15 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
         <div className="site-page-content">
             <h1 style={styles.header}>Дипломы и сертификаты</h1>
             <div style={styles.gallery}>
-                {loadedImages.length > 0 ? (
+                {isLoading ? (
+                    <div style={styles.spinnerContainer}>
+                        <div
+                            style={styles.spinner}
+                            role="status"
+                            aria-label="Загрузка сертификатов"
+                        />
+                    </div>
+                ) : loadedImages.length > 0 ? (
                     loadedImages.map((img, index) => (
                         <div
                             key={index}
@@ -99,29 +111,7 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
                     ))
                 ) : (
                     <div style={styles.placeholder}>
-                        <h3>Как добавить сертификаты:</h3>
-                        <br />
-                        <ol style={styles.instructions}>
-                            <li>
-                                <p>Загрузите изображения сертификатов в директорию:</p>
-                                <code style={styles.code}>src/assets/pictures/evsikov/</code>
-                            </li>
-                            <li>
-                                <p>Откройте файл:</p>
-                                <code style={styles.code}>src/components/showcase/Certificates.tsx</code>
-                            </li>
-                            <li>
-                                <p>Добавьте имена файлов в массив <code style={styles.code}>CERTIFICATE_FILES</code></p>
-                                <p>Пример:</p>
-                                <pre style={styles.codeBlock}>
-{`const CERTIFICATE_FILES = [
-    'certificate-1.jpg',
-    'diploma-bachelor.jpg',
-    'certificate-ozon.png',
-];`}
-                                </pre>
-                            </li>
-                        </ol>
+                        <h3>Сертификаты недоступны для отображения</h3>
                     </div>
                 )}
             </div>
@@ -194,13 +184,13 @@ const styles: StyleSheetCSS = {
     code: {
         backgroundColor: '#e0e0e0',
         padding: '2px 6px',
-        fontFamily: 'PixelifySans, monospace',
+        fontFamily: 'Handjet, monospace',
         fontSize: 14,
     },
     codeBlock: {
         backgroundColor: '#e0e0e0',
         padding: 12,
-        fontFamily: 'PixelifySans, monospace',
+        fontFamily: 'Handjet, monospace',
         fontSize: 14,
         overflow: 'auto',
         marginTop: 8,
@@ -227,6 +217,21 @@ const styles: StyleSheetCSS = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    spinnerContainer: {
+        gridColumn: '1 / -1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 48,
+    },
+    spinner: {
+        width: 64,
+        height: 64,
+        borderRadius: '50%',
+        border: '6px solid #000',
+        borderTopColor: 'transparent',
+        animation: 'showcase-spin 1s linear infinite',
     },
 };
 
