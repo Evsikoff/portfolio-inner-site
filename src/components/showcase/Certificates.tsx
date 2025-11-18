@@ -3,30 +3,38 @@ import { useNavigate } from 'react-router-dom';
 
 export interface CertificatesProps {}
 
+// Список файлов сертификатов для загрузки
+// Добавьте сюда имена ваших файлов сертификатов
+const CERTIFICATE_FILES = [
+    // Примеры:
+    // 'certificate-1.jpg',
+    // 'diploma-bachelor.jpg',
+    // 'certificate-ozon.png',
+];
+
 const Certificates: React.FC<CertificatesProps> = (props) => {
     const navigate = useNavigate();
-    const [images, setImages] = useState<string[]>([]);
+    const [loadedImages, setLoadedImages] = useState<Array<{ src: string; name: string }>>([]);
 
     useEffect(() => {
-        // Dynamically import all images from the evsikov directory except unnamed (6).jpg
-        const importImages = async () => {
-            try {
-                const context = require.context(
-                    '../../assets/pictures/evsikov',
-                    false,
-                    /\.(png|jpe?g|gif)$/
-                );
-                const imagePaths = context
-                    .keys()
-                    .filter((path) => !path.includes('unnamed (6)'))
-                    .map((path) => context(path));
-                setImages(imagePaths);
-            } catch (error) {
-                console.error('Error loading images:', error);
+        const loadImages = async () => {
+            const images: Array<{ src: string; name: string }> = [];
+
+            for (const fileName of CERTIFICATE_FILES) {
+                try {
+                    const image = await import(`../../assets/pictures/evsikov/${fileName}`);
+                    images.push({ src: image.default, name: fileName });
+                } catch (error) {
+                    console.warn(`Could not load image: ${fileName}`);
+                }
             }
+
+            setLoadedImages(images);
         };
 
-        importImages();
+        if (CERTIFICATE_FILES.length > 0) {
+            loadImages();
+        }
     }, []);
 
     const goHome = () => {
@@ -37,21 +45,42 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
         <div className="site-page-content">
             <h1 style={styles.header}>Дипломы и сертификаты</h1>
             <div style={styles.gallery}>
-                {images.length > 0 ? (
-                    images.map((img, index) => (
+                {loadedImages.length > 0 ? (
+                    loadedImages.map((img, index) => (
                         <div key={index} style={styles.imageContainer}>
                             <img
-                                src={img}
+                                src={img.src}
                                 alt={`Сертификат ${index + 1}`}
                                 style={styles.image}
                             />
                         </div>
                     ))
                 ) : (
-                    <p>
-                        Изображения сертификатов будут отображены здесь после загрузки в
-                        директорию src/assets/pictures/evsikov/
-                    </p>
+                    <div style={styles.placeholder}>
+                        <h3>Как добавить сертификаты:</h3>
+                        <br />
+                        <ol style={styles.instructions}>
+                            <li>
+                                <p>Загрузите изображения сертификатов в директорию:</p>
+                                <code style={styles.code}>src/assets/pictures/evsikov/</code>
+                            </li>
+                            <li>
+                                <p>Откройте файл:</p>
+                                <code style={styles.code}>src/components/showcase/Certificates.tsx</code>
+                            </li>
+                            <li>
+                                <p>Добавьте имена файлов в массив <code style={styles.code}>CERTIFICATE_FILES</code></p>
+                                <p>Пример:</p>
+                                <pre style={styles.codeBlock}>
+{`const CERTIFICATE_FILES = [
+    'certificate-1.jpg',
+    'diploma-bachelor.jpg',
+    'certificate-ozon.png',
+];`}
+                                </pre>
+                            </li>
+                        </ol>
+                    </div>
                 )}
             </div>
             <div style={styles.resumeContainer}>
@@ -97,6 +126,30 @@ const styles: StyleSheetCSS = {
         width: '100%',
         height: 'auto',
         display: 'block',
+    },
+    placeholder: {
+        gridColumn: '1 / -1',
+        padding: 32,
+        border: '2px solid #000',
+        backgroundColor: '#f0f0f0',
+    },
+    instructions: {
+        textAlign: 'left',
+        paddingLeft: 20,
+    },
+    code: {
+        backgroundColor: '#e0e0e0',
+        padding: '2px 6px',
+        fontFamily: 'monospace',
+        fontSize: 14,
+    },
+    codeBlock: {
+        backgroundColor: '#e0e0e0',
+        padding: 12,
+        fontFamily: 'monospace',
+        fontSize: 14,
+        overflow: 'auto',
+        marginTop: 8,
     },
     resumeContainer: {
         marginTop: 48,
