@@ -36,7 +36,7 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
             bottomLeftText={'© Copyright 2025 Евсиков Андрей'}
         >
             <Router>
-                <div className="site-page">
+                <div className="site-page showcase-font">
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
