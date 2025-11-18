@@ -46,19 +46,18 @@ const About: React.FC<AboutProps> = () => {
 const styles: StyleSheetCSS = {
     headerRow: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 16,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: 12,
     },
     introBlock: {
         display: 'flex',
-        gap: 32,
-        alignItems: 'center',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
+        gap: 24,
     },
     portraitContainer: {
         maxWidth: 320,
-        flex: '1 1 240px',
+        width: '100%',
     },
     portrait: {
         width: '100%',
@@ -68,7 +67,7 @@ const styles: StyleSheetCSS = {
         boxShadow: '0 4px 18px rgba(0,0,0,0.12)',
     },
     textColumn: {
-        flex: '2 1 300px',
+        width: '100%',
     },
     homeButton: {
         width: 48,

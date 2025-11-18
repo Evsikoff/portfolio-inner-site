@@ -36,32 +36,33 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = () => {
 
 const styles: StyleSheetCSS = {
     navbar: {
-        width: 300,
-        height: '100%',
+        width: '100%',
         flexDirection: 'column',
-        padding: 48,
+        padding: 32,
         boxSizing: 'border-box',
-        position: 'fixed',
+        position: 'relative',
         overflow: 'hidden',
     },
     header: {
+        display: 'flex',
         flexDirection: 'column',
-        marginBottom: 64,
+        marginBottom: 32,
+        gap: 4,
     },
     headerText: {
         fontSize: 38,
         lineHeight: 1,
     },
     headerShowcase: {
-        marginTop: 12,
+        marginTop: 8,
     },
     link: {
         marginBottom: 28,
     },
     links: {
+        display: 'flex',
         flexDirection: 'column',
-        flex: 1,
-        justifyContent: 'center',
+        gap: 12,
     },
 };
 

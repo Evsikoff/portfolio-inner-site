@@ -474,17 +474,17 @@ const Experience: React.FC<ExperienceProps> = () => {
 const styles: StyleSheetCSS = {
     headerRow: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 16,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: 12,
     },
     layout: {
         display: 'flex',
+        flexDirection: 'column',
         gap: 24,
-        alignItems: 'flex-start',
     },
     menu: {
-        width: 360,
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
@@ -503,13 +503,11 @@ const styles: StyleSheetCSS = {
         background: '#f0f0f0',
     },
     content: {
-        flex: 1,
+        width: '100%',
         border: '1px solid #d0d0d0',
         borderRadius: 8,
         padding: 16,
         background: '#fafafa',
-        maxHeight: '70vh',
-        overflowY: 'auto',
         boxSizing: 'border-box',
     },
     homeButton: {

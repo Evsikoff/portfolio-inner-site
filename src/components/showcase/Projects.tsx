@@ -41,9 +41,9 @@ const Projects: React.FC<ProjectsProps> = () => {
 const styles: StyleSheetCSS = {
     headerRow: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 16,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: 12,
     },
     homeButton: {
         width: 48,

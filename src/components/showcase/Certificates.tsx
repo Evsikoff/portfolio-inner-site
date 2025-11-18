@@ -88,9 +88,9 @@ const Certificates: React.FC<CertificatesProps> = () => {
 const styles: StyleSheetCSS = {
     headerRow: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 16,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: 12,
     },
     homeButton: {
         width: 48,
@@ -102,9 +102,9 @@ const styles: StyleSheetCSS = {
         fontSize: 24,
     },
     grid: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-        gap: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 16,
         width: '100%',
     },
     card: {
@@ -116,7 +116,7 @@ const styles: StyleSheetCSS = {
     },
     image: {
         width: '100%',
-        height: '100%',
+        height: 'auto',
         objectFit: 'cover',
         borderRadius: 6,
     },
