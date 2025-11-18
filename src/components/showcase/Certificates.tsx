@@ -7,10 +7,28 @@ export interface CertificatesProps {}
 // Список файлов сертификатов для загрузки
 // Добавьте сюда имена ваших файлов сертификатов
 const CERTIFICATE_FILES: string[] = [
-    // Примеры:
-    // 'certificate-1.jpg',
-    // 'diploma-bachelor.jpg',
-    // 'certificate-ozon.png',
+    '395488.png',
+    '39554.png',
+    '4848.png',
+    '48851.png',
+    '5895959.png',
+    '5958.png',
+    '595848.png',
+    '59632.jpg',
+    '596552.jpg',
+    '59846.jpg',
+    '63214.jpg',
+    '6559.png',
+    '66994587.jpg',
+    '695417.jpg',
+    '84848.png',
+    '84848521.png',
+    '88846.png',
+    '9558477.jpg',
+    '956954.jpg',
+    '959559.png',
+    '9655.jpg',
+    '966654.png'
 ];
 
 const Certificates: React.FC<CertificatesProps> = (props) => {
