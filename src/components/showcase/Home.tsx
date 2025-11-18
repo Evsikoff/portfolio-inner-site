@@ -82,7 +82,7 @@ const styles: StyleSheetCSS = {
         padding: 16,
     },
     resumeLink: {
-        marginTop: 48,
+        marginTop: 24,
         textAlign: 'center',
     },
     name: {
