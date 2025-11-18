@@ -10,7 +10,6 @@ import Toolbar from './Toolbar';
 import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
 import { IconName } from '../../assets/icons';
-import Credits from '../applications/Credits';
 
 export interface DesktopProps {}
 
@@ -59,12 +58,6 @@ const APPLICATIONS: {
         name: 'Henordle',
         shortcutIcon: 'henordleIcon',
         component: Henordle,
-    },
-    credits: {
-        key: 'credits',
-        name: 'Credits',
-        shortcutIcon: 'credits',
-        component: Credits,
     },
 };
 

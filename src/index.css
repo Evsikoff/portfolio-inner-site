@@ -46,6 +46,14 @@ code {
     font-display: swap;
 }
 
+@font-face {
+    font-family: Handjet;
+    src: url('./assets/fonts/Handjet-VariableFont_ELGR,ELSH,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 
 * {
     -webkit-touch-callout: none;
@@ -264,7 +272,7 @@ input:active {
 }
 
 .showcase-font {
-    font-family: PixelifySans, sans-serif;
+    font-family: Handjet, sans-serif;
 }
 
 .showcase-font p,
@@ -282,7 +290,7 @@ input:active {
 .showcase-font textarea,
 .showcase-font code,
 .showcase-font pre {
-    font-family: PixelifySans, sans-serif;
+    font-family: Handjet, sans-serif;
 }
 
 .site-page-content {
@@ -298,6 +306,16 @@ input:active {
 
 .router-link:visited {
     color: purple;
+}
+
+.showcase-spinner {
+    animation: showcase-spin 1s linear infinite;
+}
+
+@keyframes showcase-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading::after {
