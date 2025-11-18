@@ -1,19 +1,45 @@
-import React from 'react';
-import myPhoto from '../../assets/pictures/evsikov/unnamed (6).jpg';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export interface AboutProps {}
 
 const About: React.FC<AboutProps> = (props) => {
     const navigate = useNavigate();
+    const [photoSrc, setPhotoSrc] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Попытка динамически импортировать фото
+        // Поддерживаем несколько возможных имен файла
+        const possibleNames = [
+            'evsikov-photo.jpg',
+            'unnamed-6.jpg',
+            'photo.jpg'
+        ];
+
+        const tryLoadPhoto = async () => {
+            for (const name of possibleNames) {
+                try {
+                    const photo = await import(`../../assets/pictures/evsikov/${name}`);
+                    setPhotoSrc(photo.default);
+                    break;
+                } catch (e) {
+                    // Продолжаем пробовать следующий файл
+                }
+            }
+        };
+
+        tryLoadPhoto();
+    }, []);
 
     return (
         <div className="site-page-content">
             <div style={styles.container}>
-                <div style={styles.photoContainer}>
-                    <img src={myPhoto} style={styles.photo} alt="Евсиков Андрей" />
-                </div>
-                <div className="text-block" style={styles.textBlock}>
+                {photoSrc && (
+                    <div style={styles.photoContainer}>
+                        <img src={photoSrc} style={styles.photo} alt="Евсиков Андрей" />
+                    </div>
+                )}
+                <div className="text-block" style={photoSrc ? styles.textBlock : styles.textBlockFull}>
                     <p>
                         Системный аналитик с архитектурным мышлением и опытом полного цикла разработки корпоративных систем — от идеи и формализации требований до архитектуры, интеграций и ввода в промышленную эксплуатацию.
                     </p>
@@ -60,6 +86,10 @@ const styles: StyleSheetCSS = {
     },
     textBlock: {
         flex: 1,
+    },
+    textBlockFull: {
+        flex: 1,
+        width: '100%',
     },
     resumeContainer: {
         marginTop: 24,
