@@ -5,7 +5,7 @@ export interface CertificatesProps {}
 
 // Список файлов сертификатов для загрузки
 // Добавьте сюда имена ваших файлов сертификатов
-const CERTIFICATE_FILES = [
+const CERTIFICATE_FILES: string[] = [
     // Примеры:
     // 'certificate-1.jpg',
     // 'diploma-bachelor.jpg',
