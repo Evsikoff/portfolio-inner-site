@@ -33,16 +33,29 @@ const CERTIFICATE_FILES: string[] = [
 
 const Certificates: React.FC<CertificatesProps> = (props) => {
     const navigate = useNavigate();
-    const [loadedImages, setLoadedImages] = useState<Array<{ src: string; name: string }>>([]);
+    const [loadedImages, setLoadedImages] = useState<
+        Array<{ src: string; name: string; width: number; height: number }>
+    >([]);
 
     useEffect(() => {
         const loadImages = async () => {
-            const images: Array<{ src: string; name: string }> = [];
+            const images: Array<{ src: string; name: string; width: number; height: number }> = [];
 
             for (const fileName of CERTIFICATE_FILES) {
                 try {
                     const image = await import(`../../assets/pictures/evsikov/${fileName}`);
-                    images.push({ src: image.default, name: fileName });
+
+                    const dimensions = await new Promise<{ width: number; height: number } | null>((resolve) => {
+                        const imgElement = new Image();
+                        imgElement.onload = () =>
+                            resolve({ width: imgElement.naturalWidth, height: imgElement.naturalHeight });
+                        imgElement.onerror = () => resolve(null);
+                        imgElement.src = image.default;
+                    });
+
+                    if (dimensions) {
+                        images.push({ src: image.default, name: fileName, ...dimensions });
+                    }
                 } catch (error) {
                     console.warn(`Could not load image: ${fileName}`);
                 }
@@ -66,12 +79,22 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
             <div style={styles.gallery}>
                 {loadedImages.length > 0 ? (
                     loadedImages.map((img, index) => (
-                        <div key={index} style={styles.imageContainer}>
-                            <img
-                                src={img.src}
-                                alt={`Сертификат ${index + 1}`}
-                                style={styles.image}
-                            />
+                        <div
+                            key={index}
+                            style={{ ...styles.imageContainer, aspectRatio: `${img.width} / ${img.height}` }}
+                        >
+                            <button
+                                type="button"
+                                style={styles.imageButton}
+                                onClick={() => window.open(img.src, '_blank', 'noopener,noreferrer')}
+                                title={`Открыть сертификат ${index + 1}`}
+                            >
+                                <img
+                                    src={img.src}
+                                    alt={`Сертификат ${index + 1}`}
+                                    style={styles.image}
+                                />
+                            </button>
                         </div>
                     ))
                 ) : (
@@ -140,11 +163,23 @@ const styles: StyleSheetCSS = {
         border: '2px solid #000',
         padding: 8,
         backgroundColor: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    imageButton: {
+        width: '100%',
+        height: '100%',
+        padding: 0,
+        border: 'none',
+        background: 'transparent',
+        cursor: 'pointer',
     },
     image: {
         width: '100%',
-        height: 'auto',
+        height: '100%',
         display: 'block',
+        objectFit: 'contain',
     },
     placeholder: {
         gridColumn: '1 / -1',

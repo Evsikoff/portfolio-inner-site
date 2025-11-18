@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import BackIcon from '../../general/BackIcon';
 import HomeIcon from '../../general/HomeIcon';
 
 export interface PromsvyazbankProps {}
@@ -9,6 +10,10 @@ const Promsvyazbank: React.FC<PromsvyazbankProps> = (props) => {
 
     const goHome = () => {
         navigate('/');
+    };
+
+    const goBack = () => {
+        navigate('/experience');
     };
 
     return (
@@ -98,6 +103,14 @@ const Promsvyazbank: React.FC<PromsvyazbankProps> = (props) => {
                 <button
                     className="site-button"
                     style={styles.homeButton}
+                    onClick={goBack}
+                    title="Назад к опыту"
+                >
+                    <BackIcon size={24} />
+                </button>
+                <button
+                    className="site-button"
+                    style={styles.homeButton}
                     onClick={goHome}
                     title="На главную"
                 >
@@ -132,6 +145,7 @@ const styles: StyleSheetCSS = {
         marginBottom: 32,
         display: 'flex',
         justifyContent: 'center',
+        gap: 12,
     },
     homeButton: {
         padding: 12,
