@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '../general/HomeIcon';
 
-// --- Статические импорты (для быстрой загрузки) ---
+// --- Статические импорты ---
 import img_395488 from '../../assets/pictures/evsikov/395488.png';
 import img_39554 from '../../assets/pictures/evsikov/39554.png';
 import img_4848 from '../../assets/pictures/evsikov/4848.png';
@@ -28,11 +28,11 @@ import img_966654 from '../../assets/pictures/evsikov/966654.png';
 
 export interface CertificatesProps {}
 
-// Пропорции для превью (стиль фотоальбома)
+// Размеры для превью
 const RATIO_LANDSCAPE = { w: 300, h: 212 };
 const RATIO_PORTRAIT = { w: 212, h: 300 };
 
-// Данные с предварительно рассчитанными углами наклона
+// Данные изображений
 const CERTIFICATES_DATA = [
     { src: img_395488, ...RATIO_LANDSCAPE },
     { src: img_39554, ...RATIO_LANDSCAPE },
@@ -57,7 +57,7 @@ const CERTIFICATES_DATA = [
     { src: img_9655, ...RATIO_LANDSCAPE },
     { src: img_966654, ...RATIO_LANDSCAPE },
 ].map((item, index) => {
-    // Стабильная генерация угла поворота и смещения по индексу
+    // Расчет угла поворота
     const rotate = (index % 2 === 0 ? 1 : -1) * ((index * 7) % 6 + 2);
     const translateY = (index % 3) * 10; 
     return { ...item, rotate, translateY };
@@ -66,14 +66,12 @@ const CERTIFICATES_DATA = [
 const Certificates: React.FC<CertificatesProps> = () => {
     const navigate = useNavigate();
 
-    // Функция возврата на главную страницу
     const goHome = () => {
         navigate('/');
     };
 
     return (
         <div className="site-page-content" style={styles.pageBackground}>
-            {/* CSS стили для эффекта фотоальбома (Полароид + Скотч) */}
             <style>{`
                 .album-card {
                     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -83,7 +81,6 @@ const Certificates: React.FC<CertificatesProps> = () => {
                     cursor: pointer;
                     background: #fff;
                 }
-                /* Эффект скотча сверху карточки */
                 .album-card::before {
                     content: '';
                     position: absolute;
@@ -124,7 +121,7 @@ const Certificates: React.FC<CertificatesProps> = () => {
                         style={{
                             ...styles.cardWrapper,
                             width: img.w,
-                            height: img.h + 35, // +35px для "подписи" снизу (эффект полароида)
+                            height: img.h + 35,
                             transform: `rotate(${img.rotate}deg) translateY(${img.translateY}px)`,
                         }}
                         onClick={() => window.open(img.src, '_blank', 'noopener,noreferrer')}
@@ -153,7 +150,6 @@ const Certificates: React.FC<CertificatesProps> = () => {
                 </a>
             </div>
 
-            {/* Кнопка "Домой" - возвращена оригинальная верстка и стили */}
             <div style={styles.homeButtonContainer}>
                 <button
                     className="site-button"
@@ -168,11 +164,9 @@ const Certificates: React.FC<CertificatesProps> = () => {
     );
 };
 
-type StyleSheetCSS = Record<string, React.CSSProperties>;
-
-const styles: StyleSheetCSS = {
+const styles: Record<string, React.CSSProperties> = {
     pageBackground: {
-        backgroundColor: '#f4f1ea', // Легкий теплый фон
+        backgroundColor: '#f4f1ea',
         minHeight: '100vh',
         paddingBottom: 60,
     },
@@ -180,7 +174,7 @@ const styles: StyleSheetCSS = {
         marginBottom: 48,
         marginTop: 32,
         textAlign: 'center',
-        // Удалены лишние стили шрифта, используется наследование сайта
+        color: '#222',
     },
     albumContainer: {
         display: 'flex',
@@ -210,4 +204,25 @@ const styles: StyleSheetCSS = {
     },
     resumeLink: {
         padding: 16,
-        f
+        fontSize: 18,
+        textDecoration: 'underline',
+        cursor: 'pointer',
+        color: '#000',
+        fontWeight: 500,
+    },
+    homeButtonContainer: {
+        marginTop: 32,
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    homeButton: {
+        padding: 12,
+        minWidth: 64,
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+};
+
+export default Certificates;
