@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+// Импортируем иконку дома (убедитесь, что путь совпадает с вашей структурой проекта)
 import HomeIcon from '../general/HomeIcon';
 
-// --- Статические импорты (для мгновенной загрузки) ---
+// --- Статические импорты изображений (для мгновенной загрузки без моргания) ---
 import img_395488 from '../../assets/pictures/evsikov/395488.png';
 import img_39554 from '../../assets/pictures/evsikov/39554.png';
 import img_4848 from '../../assets/pictures/evsikov/4848.png';
@@ -28,11 +29,11 @@ import img_966654 from '../../assets/pictures/evsikov/966654.png';
 
 export interface CertificatesProps {}
 
-// Пропорции для превью
+// Пропорции для превью (стиль фотоальбома)
 const RATIO_LANDSCAPE = { w: 300, h: 212 };
 const RATIO_PORTRAIT = { w: 212, h: 300 };
 
-// Данные с предварительно рассчитанными углами
+// Данные с предварительно рассчитанными углами наклона
 const CERTIFICATES_DATA = [
     { src: img_395488, ...RATIO_LANDSCAPE },
     { src: img_39554, ...RATIO_LANDSCAPE },
@@ -57,7 +58,7 @@ const CERTIFICATES_DATA = [
     { src: img_9655, ...RATIO_LANDSCAPE },
     { src: img_966654, ...RATIO_LANDSCAPE },
 ].map((item, index) => {
-    // Стабильная генерация угла поворота и смещения
+    // Стабильная генерация угла поворота и смещения по индексу
     const rotate = (index % 2 === 0 ? 1 : -1) * ((index * 7) % 6 + 2);
     const translateY = (index % 3) * 10; 
     return { ...item, rotate, translateY };
@@ -66,14 +67,14 @@ const CERTIFICATES_DATA = [
 const Certificates: React.FC<CertificatesProps> = () => {
     const navigate = useNavigate();
 
+    // Функция возврата на главную страницу (Home.tsx)
     const goHome = () => {
         navigate('/');
     };
 
     return (
-        // Добавил pageBackground для теплого оттенка, но сохранил оригинальный класс
         <div className="site-page-content" style={styles.pageBackground}>
-            {/* CSS стили для эффекта фотоальбома и ховера */}
+            {/* CSS стили для эффекта фотоальбома (Полароид + Скотч) */}
             <style>{`
                 .album-card {
                     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -83,7 +84,7 @@ const Certificates: React.FC<CertificatesProps> = () => {
                     cursor: pointer;
                     background: #fff;
                 }
-                /* Эффект скотча */
+                /* Эффект скотча сверху карточки */
                 .album-card::before {
                     content: '';
                     position: absolute;
@@ -124,7 +125,7 @@ const Certificates: React.FC<CertificatesProps> = () => {
                         style={{
                             ...styles.cardWrapper,
                             width: img.w,
-                            height: img.h + 35, // Место под "подпись" полароида
+                            height: img.h + 35, // +35px для "подписи" снизу (эффект полароида)
                             transform: `rotate(${img.rotate}deg) translateY(${img.translateY}px)`,
                         }}
                         onClick={() => window.open(img.src, '_blank', 'noopener,noreferrer')}
@@ -153,6 +154,7 @@ const Certificates: React.FC<CertificatesProps> = () => {
                 </a>
             </div>
 
+            {/* Кнопка "Домой" с иконкой домика */}
             <div style={styles.homeButtonContainer}>
                 <button
                     className="site-button"
@@ -171,7 +173,7 @@ type StyleSheetCSS = Record<string, React.CSSProperties>;
 
 const styles: StyleSheetCSS = {
     pageBackground: {
-        backgroundColor: '#f4f1ea', // Легкий теплый фон, чтобы белые рамки фото выделялись
+        backgroundColor: '#f4f1ea', // Легкий теплый фон
         minHeight: '100vh',
         paddingBottom: 60,
     },
@@ -185,7 +187,7 @@ const styles: StyleSheetCSS = {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        gap: '60px', // Отступы между фото
+        gap: '60px',
         padding: '20px 40px',
         maxWidth: '1400px',
         margin: '0 auto',
@@ -201,7 +203,7 @@ const styles: StyleSheetCSS = {
         height: '100%',
         objectFit: 'cover',
         display: 'block',
-        border: '1px solid #eee', // Тонкая рамка вокруг самого изображения внутри карточки
+        border: '1px solid #eee',
     },
     resumeContainer: {
         marginTop: 80,
@@ -227,6 +229,9 @@ const styles: StyleSheetCSS = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        // Если класс site-button отсутствует, добавим базовые стили, чтобы кнопка была видна
+        backgroundColor: 'transparent',
+        border: 'none',
     },
 };
 
