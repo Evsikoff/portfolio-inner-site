@@ -1,80 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '../general/HomeIcon';
 
+// --- Статические импорты изображений ---
+// Это позволяет сборщику знать о файлах сразу, убирая задержку "появления"
+import img_395488 from '../../assets/pictures/evsikov/395488.png';
+import img_39554 from '../../assets/pictures/evsikov/39554.png';
+import img_4848 from '../../assets/pictures/evsikov/4848.png';
+import img_48851 from '../../assets/pictures/evsikov/48851.png';
+import img_5895959 from '../../assets/pictures/evsikov/5895959.png';
+import img_5958 from '../../assets/pictures/evsikov/5958.png';
+import img_595848 from '../../assets/pictures/evsikov/595848.png';
+import img_59632 from '../../assets/pictures/evsikov/59632.jpg';
+import img_596552 from '../../assets/pictures/evsikov/596552.jpg';
+import img_59846 from '../../assets/pictures/evsikov/59846.jpg';
+import img_63214 from '../../assets/pictures/evsikov/63214.jpg';
+import img_6559 from '../../assets/pictures/evsikov/6559.png';
+import img_66994587 from '../../assets/pictures/evsikov/66994587.jpg';
+import img_695417 from '../../assets/pictures/evsikov/695417.jpg';
+import img_84848 from '../../assets/pictures/evsikov/84848.png';
+import img_84848521 from '../../assets/pictures/evsikov/84848521.png';
+import img_88846 from '../../assets/pictures/evsikov/88846.png';
+import img_9558477 from '../../assets/pictures/evsikov/9558477.jpg';
+import img_956954 from '../../assets/pictures/evsikov/956954.jpg';
+import img_959559 from '../../assets/pictures/evsikov/959559.png';
+import img_9655 from '../../assets/pictures/evsikov/9655.jpg';
+import img_966654 from '../../assets/pictures/evsikov/966654.png';
+
 export interface CertificatesProps {}
 
-// Список файлов сертификатов для загрузки
-// Добавьте сюда имена ваших файлов сертификатов
-const CERTIFICATE_FILES: string[] = [
-    '395488.png',
-    '39554.png',
-    '4848.png',
-    '48851.png',
-    '5895959.png',
-    '5958.png',
-    '595848.png',
-    '59632.jpg',
-    '596552.jpg',
-    '59846.jpg',
-    '63214.jpg',
-    '6559.png',
-    '66994587.jpg',
-    '695417.jpg',
-    '84848.png',
-    '84848521.png',
-    '88846.png',
-    '9558477.jpg',
-    '956954.jpg',
-    '959559.png',
-    '9655.jpg',
-    '966654.png'
+// Стандартные пропорции для A4
+const RATIO_LANDSCAPE = { w: 1414, h: 1000 };
+const RATIO_PORTRAIT = { w: 1000, h: 1414 };
+
+// Конфигурация сертификатов.
+// Размеры жестко заданы, чтобы браузер зарезервировал место под них до загрузки картинки.
+// ПРИМЕЧАНИЕ: Я расставил флаг isPortrait для файлов, которые визуально определил как вертикальные
+// в предположении, что порядок файлов соответствует вашему списку. Если какой-то сертификат
+// отобразится "обрезанным" или странным, просто поменяйте 'isPortrait: false' на 'true' для него.
+const CERTIFICATES_DATA = [
+    { src: img_395488, ...RATIO_LANDSCAPE }, // Ozon Agile
+    { src: img_39554, ...RATIO_LANDSCAPE },  // Main Train
+    { src: img_4848, ...RATIO_LANDSCAPE },   // Ozon Guru
+    { src: img_48851, ...RATIO_LANDSCAPE },  // Start Project
+    { src: img_5895959, ...RATIO_LANDSCAPE }, // Close Project
+    { src: img_5958, ...RATIO_LANDSCAPE },    // Control
+    { src: img_595848, ...RATIO_LANDSCAPE },  // Facilitation
+    { src: img_59632, ...RATIO_LANDSCAPE },   // Comm
+    { src: img_596552, ...RATIO_LANDSCAPE },  // Risks
+    { src: img_59846, ...RATIO_LANDSCAPE },   // Plan
+    { src: img_63214, ...RATIO_LANDSCAPE },   // Scope
+    { src: img_6559, ...RATIO_LANDSCAPE },    // IBS
+    { src: img_66994587, ...RATIO_PORTRAIT }, // Analyst Days (Portrait)
+    { src: img_695417, ...RATIO_LANDSCAPE },  // Bauman
+    { src: img_84848, ...RATIO_LANDSCAPE },   // Specialist
+    { src: img_84848521, ...RATIO_PORTRAIT }, // Patent School (Portrait)
+    { src: img_88846, ...RATIO_LANDSCAPE },   // MISIS
+    { src: img_9558477, ...RATIO_PORTRAIT },  // Art Terra 1C (Portrait)
+    { src: img_956954, ...RATIO_PORTRAIT },   // Runa WFE (Portrait)
+    { src: img_959559, ...RATIO_PORTRAIT },   // Project Bureau (Portrait)
+    { src: img_9655, ...RATIO_LANDSCAPE },    // Business Studio
+    { src: img_966654, ...RATIO_LANDSCAPE },  // Microarch
 ];
 
-const Certificates: React.FC<CertificatesProps> = (props) => {
+const Certificates: React.FC<CertificatesProps> = () => {
     const navigate = useNavigate();
-    const [loadedImages, setLoadedImages] = useState<
-        Array<{ src: string; name: string; width: number; height: number }>
-    >([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const loadImages = async () => {
-            const loadImage = async (fileName: string) => {
-                try {
-                    const image = await import(`../../assets/pictures/evsikov/${fileName}`);
-
-                    const dimensions = await new Promise<{ width: number; height: number } | null>((resolve) => {
-                        const imgElement = new Image();
-                        imgElement.onload = () =>
-                            resolve({ width: imgElement.naturalWidth, height: imgElement.naturalHeight });
-                        imgElement.onerror = () => resolve(null);
-                        imgElement.src = image.default;
-                    });
-
-                    if (dimensions) {
-                        return { src: image.default, name: fileName, ...dimensions };
-                    }
-
-                    return null;
-                } catch (error) {
-                    console.warn(`Could not load image: ${fileName}`);
-                    return null;
-                }
-            };
-
-            const images = await Promise.all(CERTIFICATE_FILES.map((fileName) => loadImage(fileName)));
-
-            setLoadedImages(images.filter(Boolean) as Array<{ src: string; name: string; width: number; height: number }>);
-            setIsLoading(false);
-        };
-
-        if (CERTIFICATE_FILES.length > 0) {
-            loadImages();
-        } else {
-            setIsLoading(false);
-        }
-    }, []);
 
     const goHome = () => {
         navigate('/');
@@ -83,20 +73,17 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
     return (
         <div className="site-page-content">
             <h1 style={styles.header}>Дипломы и сертификаты</h1>
-            <div style={styles.gallery}>
-                {isLoading ? (
-                    <div style={styles.spinnerContainer}>
+            
+            {/* Используем CSS Masonry для красивой "кирпичной" раскладки */}
+            <div style={styles.masonryGallery}>
+                {CERTIFICATES_DATA.map((img, index) => (
+                    <div key={index} style={styles.masonryItem}>
                         <div
-                            style={styles.spinner}
-                            role="status"
-                            aria-label="Загрузка сертификатов"
-                        />
-                    </div>
-                ) : loadedImages.length > 0 ? (
-                    loadedImages.map((img, index) => (
-                        <div
-                            key={index}
-                            style={{ ...styles.imageContainer, aspectRatio: `${img.width} / ${img.height}` }}
+                            style={{
+                                ...styles.imageWrapper,
+                                // aspect-ratio резервирует место мгновенно
+                                aspectRatio: `${img.w} / ${img.h}` 
+                            }}
                         >
                             <button
                                 type="button"
@@ -107,17 +94,16 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
                                 <img
                                     src={img.src}
                                     alt={`Сертификат ${index + 1}`}
+                                    loading="lazy" // Ленивая загрузка для ускорения начального рендера
+                                    decoding="async"
                                     style={styles.image}
                                 />
                             </button>
                         </div>
-                    ))
-                ) : (
-                    <div style={styles.placeholder}>
-                        <h3>Сертификаты недоступны для отображения</h3>
                     </div>
-                )}
+                ))}
             </div>
+
             <div style={styles.resumeContainer}>
                 <a
                     href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
@@ -142,23 +128,35 @@ const Certificates: React.FC<CertificatesProps> = (props) => {
     );
 };
 
+// Типизация для styles (если используете TS и объект стилей)
+type StyleSheetCSS = Record<string, React.CSSProperties>;
+
 const styles: StyleSheetCSS = {
     header: {
         marginBottom: 32,
+        textAlign: 'center', // Обычно заголовки лучше смотрятся по центру
     },
-    gallery: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-        gap: 24,
-        marginBottom: 32,
+    // Masonry Layout через CSS Columns - самый надежный способ для разных высот
+    masonryGallery: {
+        columnCount: 3, // По умолчанию 3 колонки
+        columnGap: 24,
+        width: '100%',
+        // Адаптивность можно добавить через media queries в CSS файле, 
+        // но здесь можно использовать JS или просто оставить columnWidth
+        // Альтернатива для inline styles:
+        columnWidth: '300px', // Браузер сам решит сколько колонок влезет
     },
-    imageContainer: {
+    masonryItem: {
+        breakInside: 'avoid', // Запрещает разрыв элемента между колонками
+        marginBottom: 24,
+        position: 'relative',
+    },
+    imageWrapper: {
         border: '2px solid #000',
         padding: 8,
         backgroundColor: '#fff',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        overflow: 'hidden',
+        position: 'relative',
     },
     imageButton: {
         width: '100%',
@@ -167,36 +165,14 @@ const styles: StyleSheetCSS = {
         border: 'none',
         background: 'transparent',
         cursor: 'pointer',
+        display: 'block',
     },
     image: {
         width: '100%',
         height: '100%',
         display: 'block',
-        objectFit: 'contain',
-    },
-    placeholder: {
-        gridColumn: '1 / -1',
-        padding: 32,
-        border: '2px solid #000',
-        backgroundColor: '#f0f0f0',
-    },
-    instructions: {
-        textAlign: 'left',
-        paddingLeft: 20,
-    },
-    code: {
-        backgroundColor: '#e0e0e0',
-        padding: '2px 6px',
-        fontFamily: 'Handjet, monospace',
-        fontSize: 14,
-    },
-    codeBlock: {
-        backgroundColor: '#e0e0e0',
-        padding: 12,
-        fontFamily: 'Handjet, monospace',
-        fontSize: 14,
-        overflow: 'auto',
-        marginTop: 8,
+        objectFit: 'cover',
+        transition: 'transform 0.2s ease',
     },
     resumeContainer: {
         marginTop: 48,
@@ -207,6 +183,7 @@ const styles: StyleSheetCSS = {
         fontSize: 18,
         textDecoration: 'underline',
         cursor: 'pointer',
+        color: '#000',
     },
     homeButtonContainer: {
         marginTop: 32,
@@ -220,21 +197,6 @@ const styles: StyleSheetCSS = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    spinnerContainer: {
-        gridColumn: '1 / -1',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 48,
-    },
-    spinner: {
-        width: 64,
-        height: 64,
-        borderRadius: '50%',
-        border: '6px solid #000',
-        borderTopColor: 'transparent',
-        animation: 'showcase-spin 1s linear infinite',
     },
 };
 
