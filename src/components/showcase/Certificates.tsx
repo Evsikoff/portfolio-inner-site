@@ -1,9 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// Импортируем иконку дома (убедитесь, что путь совпадает с вашей структурой проекта)
 import HomeIcon from '../general/HomeIcon';
 
-// --- Статические импорты изображений (для мгновенной загрузки без моргания) ---
+// --- Статические импорты (для быстрой загрузки) ---
 import img_395488 from '../../assets/pictures/evsikov/395488.png';
 import img_39554 from '../../assets/pictures/evsikov/39554.png';
 import img_4848 from '../../assets/pictures/evsikov/4848.png';
@@ -67,7 +66,7 @@ const CERTIFICATES_DATA = [
 const Certificates: React.FC<CertificatesProps> = () => {
     const navigate = useNavigate();
 
-    // Функция возврата на главную страницу (Home.tsx)
+    // Функция возврата на главную страницу
     const goHome = () => {
         navigate('/');
     };
@@ -154,7 +153,7 @@ const Certificates: React.FC<CertificatesProps> = () => {
                 </a>
             </div>
 
-            {/* Кнопка "Домой" с иконкой домика */}
+            {/* Кнопка "Домой" - возвращена оригинальная верстка и стили */}
             <div style={styles.homeButtonContainer}>
                 <button
                     className="site-button"
@@ -181,7 +180,7 @@ const styles: StyleSheetCSS = {
         marginBottom: 48,
         marginTop: 32,
         textAlign: 'center',
-        color: '#222',
+        // Удалены лишние стили шрифта, используется наследование сайта
     },
     albumContainer: {
         display: 'flex',
@@ -211,28 +210,4 @@ const styles: StyleSheetCSS = {
     },
     resumeLink: {
         padding: 16,
-        fontSize: 18,
-        textDecoration: 'underline',
-        cursor: 'pointer',
-        color: '#000',
-        fontWeight: 500,
-    },
-    homeButtonContainer: {
-        marginTop: 32,
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    homeButton: {
-        padding: 12,
-        minWidth: 64,
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        // Если класс site-button отсутствует, добавим базовые стили, чтобы кнопка была видна
-        backgroundColor: 'transparent',
-        border: 'none',
-    },
-};
-
-export default Certificates;
+        f
