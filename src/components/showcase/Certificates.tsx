@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '../general/HomeIcon';
 
-// --- Статические импорты (без изменений) ---
+// --- Статические импорты (для мгновенной загрузки) ---
 import img_395488 from '../../assets/pictures/evsikov/395488.png';
 import img_39554 from '../../assets/pictures/evsikov/39554.png';
 import img_4848 from '../../assets/pictures/evsikov/4848.png';
@@ -28,12 +28,11 @@ import img_966654 from '../../assets/pictures/evsikov/966654.png';
 
 export interface CertificatesProps {}
 
-// Пропорции (немного уменьшим базовый размер для компактности альбома)
-const RATIO_LANDSCAPE = { w: 300, h: 212 }; // A4 Landscape scale
-const RATIO_PORTRAIT = { w: 212, h: 300 };  // A4 Portrait scale
+// Пропорции для превью
+const RATIO_LANDSCAPE = { w: 300, h: 212 };
+const RATIO_PORTRAIT = { w: 212, h: 300 };
 
-// Данные + Генерация "случайного" угла поворота на основе индекса
-// Мы не используем Math.random(), чтобы при перерисовке фото не дергались
+// Данные с предварительно рассчитанными углами
 const CERTIFICATES_DATA = [
     { src: img_395488, ...RATIO_LANDSCAPE },
     { src: img_39554, ...RATIO_LANDSCAPE },
@@ -58,9 +57,8 @@ const CERTIFICATES_DATA = [
     { src: img_9655, ...RATIO_LANDSCAPE },
     { src: img_966654, ...RATIO_LANDSCAPE },
 ].map((item, index) => {
-    // Генерируем угол от -6 до +6 градусов
+    // Стабильная генерация угла поворота и смещения
     const rotate = (index % 2 === 0 ? 1 : -1) * ((index * 7) % 6 + 2);
-    // Генерируем небольшой сдвиг по вертикали, чтобы не было скучных линий
     const translateY = (index % 3) * 10; 
     return { ...item, rotate, translateY };
 });
@@ -68,9 +66,14 @@ const CERTIFICATES_DATA = [
 const Certificates: React.FC<CertificatesProps> = () => {
     const navigate = useNavigate();
 
+    const goHome = () => {
+        navigate('/');
+    };
+
     return (
+        // Добавил pageBackground для теплого оттенка, но сохранил оригинальный класс
         <div className="site-page-content" style={styles.pageBackground}>
-            {/* Вставляем стили для эффектов ховера и скотча прямо здесь */}
+            {/* CSS стили для эффекта фотоальбома и ховера */}
             <style>{`
                 .album-card {
                     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -80,7 +83,7 @@ const Certificates: React.FC<CertificatesProps> = () => {
                     cursor: pointer;
                     background: #fff;
                 }
-                /* Эффект скотча сверху */
+                /* Эффект скотча */
                 .album-card::before {
                     content: '';
                     position: absolute;
@@ -95,23 +98,23 @@ const Certificates: React.FC<CertificatesProps> = () => {
                     box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
                     opacity: 0.7;
                     z-index: 2;
+                    pointer-events: none;
                 }
                 .album-card:hover {
-                    transform: scale(1.15) rotate(0deg) translateY(0) !important;
+                    transform: scale(1.2) rotate(0deg) translateY(0) !important;
                     z-index: 100;
-                    box-shadow: 15px 15px 35px rgba(0,0,0,0.3);
+                    box-shadow: 20px 20px 40px rgba(0,0,0,0.4);
                 }
                 .album-card img {
-                    filter: sepia(10%); /* Легкий эффект старины */
+                    filter: sepia(15%);
                     transition: filter 0.3s;
                 }
                 .album-card:hover img {
-                    filter: sepia(0%); /* Убираем фильтр при просмотре */
+                    filter: sepia(0%);
                 }
             `}</style>
 
-            <h1 style={styles.header}>Мои достижения</h1>
-            <p style={styles.subHeader}>Коллекция дипломов и сертификатов</p>
+            <h1 style={styles.header}>Дипломы и сертификаты</h1>
             
             <div style={styles.albumContainer}>
                 {CERTIFICATES_DATA.map((img, index) => (
@@ -121,11 +124,11 @@ const Certificates: React.FC<CertificatesProps> = () => {
                         style={{
                             ...styles.cardWrapper,
                             width: img.w,
-                            height: img.h + 30, // +30px для "подписи" снизу (стиль полароид)
+                            height: img.h + 35, // Место под "подпись" полароида
                             transform: `rotate(${img.rotate}deg) translateY(${img.translateY}px)`,
                         }}
                         onClick={() => window.open(img.src, '_blank', 'noopener,noreferrer')}
-                        title="Нажмите, чтобы рассмотреть"
+                        title="Нажмите, чтобы открыть оригинал"
                     >
                         <div style={{ width: img.w - 20, height: img.h - 20, margin: '10px auto 0' }}>
                             <img
@@ -139,20 +142,22 @@ const Certificates: React.FC<CertificatesProps> = () => {
                 ))}
             </div>
 
-            <div style={styles.controlsContainer}>
+            <div style={styles.resumeContainer}>
                 <a
                     href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
                     target="_blank"
                     rel="noreferrer"
                     style={styles.resumeLink}
                 >
-                    📄 Скачать резюме
+                    Резюме
                 </a>
-                
+            </div>
+
+            <div style={styles.homeButtonContainer}>
                 <button
                     className="site-button"
                     style={styles.homeButton}
-                    onClick={() => navigate('/')}
+                    onClick={goHome}
                     title="На главную"
                 >
                     <HomeIcon size={24} />
@@ -162,41 +167,33 @@ const Certificates: React.FC<CertificatesProps> = () => {
     );
 };
 
-const styles: Record<string, React.CSSProperties> = {
+type StyleSheetCSS = Record<string, React.CSSProperties>;
+
+const styles: StyleSheetCSS = {
     pageBackground: {
-        // Легкий фон "под бумагу" или стол
-        backgroundColor: '#f4f1ea', 
-        paddingBottom: 60,
+        backgroundColor: '#f4f1ea', // Легкий теплый фон, чтобы белые рамки фото выделялись
         minHeight: '100vh',
+        paddingBottom: 60,
     },
     header: {
-        marginBottom: 8,
-        paddingTop: 32,
-        textAlign: 'center',
-        fontFamily: '"Courier New", Courier, monospace', // Шрифт печатной машинки
-        fontSize: '2.5rem',
-        color: '#333',
-    },
-    subHeader: {
-        textAlign: 'center',
         marginBottom: 48,
-        color: '#666',
-        fontStyle: 'italic',
+        marginTop: 32,
+        textAlign: 'center',
+        color: '#222',
     },
     albumContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        gap: '50px', // Большие отступы, чтобы фото "дышали"
+        gap: '60px', // Отступы между фото
         padding: '20px 40px',
         maxWidth: '1400px',
         margin: '0 auto',
     },
     cardWrapper: {
-        padding: '0',
-        boxSizing: 'content-box', // Важно для полей полароида
+        padding: 0,
+        boxSizing: 'content-box',
         backgroundColor: '#fff',
-        // Тонкая серая рамка для реализма
         border: '1px solid #e0e0e0', 
     },
     image: {
@@ -204,25 +201,24 @@ const styles: Record<string, React.CSSProperties> = {
         height: '100%',
         objectFit: 'cover',
         display: 'block',
-        // Внутренняя рамка фото
-        border: '1px solid #eee', 
+        border: '1px solid #eee', // Тонкая рамка вокруг самого изображения внутри карточки
     },
-    controlsContainer: {
+    resumeContainer: {
         marginTop: 80,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 20,
+        textAlign: 'center',
     },
     resumeLink: {
-        padding: '12px 24px',
+        padding: 16,
         fontSize: 18,
-        textDecoration: 'none',
-        color: '#fff',
-        backgroundColor: '#333',
-        borderRadius: '4px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        transition: 'transform 0.2s',
+        textDecoration: 'underline',
+        cursor: 'pointer',
+        color: '#000',
+        fontWeight: 500,
+    },
+    homeButtonContainer: {
+        marginTop: 32,
+        display: 'flex',
+        justifyContent: 'center',
     },
     homeButton: {
         padding: 12,
@@ -231,8 +227,6 @@ const styles: Record<string, React.CSSProperties> = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        border: 'none',
-        background: 'transparent',
     },
 };
 
