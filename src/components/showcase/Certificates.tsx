@@ -112,7 +112,18 @@ const Certificates: React.FC<CertificatesProps> = () => {
             `}</style>
 
             <h1 style={styles.header}>Дипломы и сертификаты</h1>
-            
+
+            <div style={styles.homeButtonContainer}>
+                <button
+                    className="site-button"
+                    style={styles.homeButton}
+                    onClick={goHome}
+                    title="На главную"
+                >
+                    <HomeIcon size={24} />
+                </button>
+            </div>
+
             <div style={styles.albumContainer}>
                 {CERTIFICATES_DATA.map((img, index) => (
                     <div 
@@ -148,17 +159,6 @@ const Certificates: React.FC<CertificatesProps> = () => {
                 >
                     Резюме
                 </a>
-            </div>
-
-            <div style={styles.homeButtonContainer}>
-                <button
-                    className="site-button"
-                    style={styles.homeButton}
-                    onClick={goHome}
-                    title="На главную"
-                >
-                    <HomeIcon size={24} />
-                </button>
             </div>
         </div>
     );
@@ -211,12 +211,12 @@ const styles: Record<string, React.CSSProperties> = {
         fontWeight: 500,
     },
     homeButtonContainer: {
-        marginTop: 32,
+        marginTop: 0,
+        marginBottom: 32,
         display: 'flex',
         justifyContent: 'center',
         position: 'relative',
         zIndex: 1000,
-        paddingBottom: 40,
     },
     homeButton: {
         padding: 12,
