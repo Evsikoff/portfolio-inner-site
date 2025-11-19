@@ -214,6 +214,9 @@ const styles: Record<string, React.CSSProperties> = {
         marginTop: 32,
         display: 'flex',
         justifyContent: 'center',
+        position: 'relative',
+        zIndex: 1000,
+        paddingBottom: 40,
     },
     homeButton: {
         padding: 12,
@@ -222,6 +225,8 @@ const styles: Record<string, React.CSSProperties> = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#e9e9e9',
+        border: '2px solid #000',
     },
 };
 
