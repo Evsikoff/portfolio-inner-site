@@ -5,8 +5,14 @@ import HomeIcon from '../../general/HomeIcon';
 
 const FreeLines: React.FC = () => {
     const navigate = useNavigate();
-    const goHome = () => navigate('/');
-    const goBack = () => navigate('/experience');
+
+    const goHome = () => {
+        navigate('/');
+    };
+
+    const goBack = () => {
+        navigate('/experience');
+    };
 
     return (
         <div className="site-page-content" style={styles.container}>
@@ -18,35 +24,22 @@ const FreeLines: React.FC = () => {
                 <ul>
                     <li><p>Спроектировал и внедрил три полноценных корпоративных системы:</p>
                         <ul>
-                            <li><p><b>ERP-систему</b> (модули CRP/SRM/логистика/бухгалтерские контуры),</p></li>
-                            <li><p><b>BPM-систему</b> на более чем 500 задач и 40+ исполнимых процессов,</p></li>
+                            <li><p><b>ERP-систему</b> (модули CRP/SRM/логистика/бухгалтерские контуры);</p></li>
+                            <li><p><b>BPM-систему</b> на более чем 500 задач и 40+ исполнимых процессов;</p></li>
                             <li><p><b>BI-систему</b> на базе QlikSense для управленческой отчётности.</p></li>
                         </ul>
                     </li>
-                    <li><p>Организовал работу над системами полного цикла: анализ → проектирование → разработка → тестирование → внедрение → поддержка.</p></li>
-                    <li><p>Обеспечил глубокую интеграцию созданных систем между собой и с внешними информационными продуктами компании.</p></li>
-                </ul>
-
-                <h3>Аналитика и проектирование</h3>
-                <ul>
-                    <li><p>Проектирование архитектуры ERP-системы: модели данных, бизнес-объекты, жизненные циклы, документооборот, логистические и финансовые модули.</p></li>
-                    <li><p>Создание BPM-процессов: маршрутизация, исполнительные правила, SLA, распределение задач, dashboard-ы контроля процессов.</p></li>
-                    <li><p>Проработка логики CRP (планирование мощностей) и SRM (работа с поставщиками).</p></li>
-                    <li><p>Формирование требований, проектирование интерфейсов, подготовка ФС/ТЗ/дизайн-артефактов.</p></li>
-                    <li><p>Проработка edge-cases, сложных сценариев, исключений, альтернативных веток процессов.</p></li>
-                </ul>
-
-                <h3>Интеграции</h3>
-                <ul>
-                    <li><p>Проектирование и реализация интеграций ERP и BPM с внешними системами:</p>
+                    <li><p>Организовал работу над системами полного цикла:</p>
                         <ul>
-                            <li><p>складская система Axelot WMS,</p></li>
-                            <li><p>системы таможенного оформления Альта-Софт,</p></li>
-                            <li><p>внутренние транспортные и логистические сервисы.</p></li>
+                            <li><p>анализ;</p></li>
+                            <li><p>проектирование;</p></li>
+                            <li><p>разработка;</p></li>
+                            <li><p>тестирование;</p></li>
+                            <li><p>внедрение;</p></li>
+                            <li><p>поддержка.</p></li>
                         </ul>
                     </li>
-                    <li><p>Создание событийной модели обмена данными, управление триггерами и бизнес-событиями.</p></li>
-                    <li><p>Обеспечение корректной многосистемной цепочки: заказ → закупка → логистика → склад → доставка → учёт.</p></li>
+                    <li><p>Обеспечил глубокую интеграцию созданных систем между собой и с внешними информационными продуктами компании.</p></li>
                 </ul>
 
                 <h3>BI-архитектура</h3>
@@ -87,7 +80,12 @@ const FreeLines: React.FC = () => {
                 >
                     <BackIcon size={24} />
                 </button>
-                <button className="site-button" style={styles.homeButton} onClick={goHome} title="На главную">
+                <button
+                    className="site-button"
+                    style={styles.homeButton}
+                    onClick={goHome}
+                    title="На главную"
+                >
                     <HomeIcon size={24} />
                 </button>
             </div>
@@ -96,12 +94,39 @@ const FreeLines: React.FC = () => {
 };
 
 const styles: StyleSheetCSS = {
-    container: { maxHeight: '100%', overflowY: 'auto' },
-    subtitle: { marginBottom: 32, marginTop: 8 },
-    resumeContainer: { marginTop: 48, textAlign: 'center' },
-    resumeLink: { padding: 16, fontSize: 18, textDecoration: 'underline', cursor: 'pointer' },
-    homeButtonContainer: { marginTop: 32, marginBottom: 32, display: 'flex', justifyContent: 'center', gap: 12 },
-    homeButton: { padding: 12, minWidth: 64, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+    container: {
+        maxHeight: '100%',
+        overflowY: 'auto',
+    },
+    subtitle: {
+        marginBottom: 32,
+        marginTop: 8,
+    },
+    resumeContainer: {
+        marginTop: 48,
+        textAlign: 'center',
+    },
+    resumeLink: {
+        padding: 16,
+        fontSize: 18,
+        textDecoration: 'underline',
+        cursor: 'pointer',
+    },
+    homeButtonContainer: {
+        marginTop: 32,
+        marginBottom: 32,
+        display: 'flex',
+        justifyContent: 'center',
+        gap: 12,
+    },
+    homeButton: {
+        padding: 12,
+        minWidth: 64,
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 };
 
 export default FreeLines;
