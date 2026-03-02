@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '../general/HomeIcon';
+import ResumeButtons from './ResumeButtons';
 
 export interface ContactProps {}
 
@@ -79,14 +80,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                 </p>
             </div>
             <div style={styles.resumeContainer}>
-                <a
-                    href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={styles.resumeLink}
-                >
-                    Резюме
-                </a>
+                <ResumeButtons />
             </div>
             <div style={styles.homeButtonContainer}>
                 <button
