@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '../general/HomeIcon';
+import ResumeButtons from './ResumeButtons';
 
 export interface AboutProps {}
 
@@ -46,11 +47,15 @@ const About: React.FC<AboutProps> = (props) => {
                 )}
                 <div className="text-block" style={photoSrc ? styles.textBlock : styles.textBlockFull}>
                     <p>
-                        Системный аналитик с архитектурным мышлением и опытом полного цикла разработки корпоративных систем — от идеи и формализации требований до архитектуры, интеграций и ввода в промышленную эксплуатацию.
+                        Системный аналитик и архитектор AI решений с архитектурным мышлением и опытом полного цикла разработки корпоративных систем — от идеи и формализации требований до архитектуры, интеграций и ввода в промышленную эксплуатацию.
                     </p>
                     <br />
                     <p>
                         Развиваю профиль технического аналитика/полу-разработчика, умею писать рабочий backend-код (Nest.js, PostgreSQL, Python), эффективно анализировать API, транзакции, интеграции и проектировать сложные модели данных.
+                    </p>
+                    <br />
+                    <p>
+                        Проектирую и внедряю AI-решения, которые автоматизируют бизнес-процессы и повышают производительность за счет интеграции LLM в промышленную инфраструктуру.
                     </p>
                     <br />
                     <p>
@@ -59,14 +64,7 @@ const About: React.FC<AboutProps> = (props) => {
                 </div>
             </div>
             <div style={styles.resumeContainer}>
-                <a
-                    href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={styles.resumeLink}
-                >
-                    Резюме
-                </a>
+                <ResumeButtons />
             </div>
             <div style={styles.homeButtonContainer}>
                 <button
@@ -109,12 +107,6 @@ const styles: StyleSheetCSS = {
     resumeContainer: {
         marginTop: 24,
         textAlign: 'center',
-    },
-    resumeLink: {
-        padding: 16,
-        fontSize: 18,
-        textDecoration: 'underline',
-        cursor: 'pointer',
     },
     homeButtonContainer: {
         marginTop: 32,

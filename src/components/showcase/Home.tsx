@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from '../general';
-import { useNavigate } from 'react-router';
+import ResumeButtons from './ResumeButtons';
 
 export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
-    const navigate = useNavigate();
-
     return (
         <div style={styles.page}>
             <div style={styles.header}>
                 <h1 style={styles.name}>Евсиков Андрей</h1>
-                <h2>Системный аналитик</h2>
+                <h2>Системный аналитик и архитектор AI решений</h2>
             </div>
             <div style={styles.buttons}>
                 <Link containerStyle={styles.link} to="about" text="1. Обо мне" />
@@ -37,14 +35,7 @@ const Home: React.FC<HomeProps> = (props) => {
                 />
             </div>
             <div style={styles.resumeLink}>
-                <a
-                    href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={styles.link}
-                >
-                    Резюме
-                </a>
+                <ResumeButtons />
             </div>
         </div>
     );

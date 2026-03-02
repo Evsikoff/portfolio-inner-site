@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackIcon from '../../general/BackIcon';
 import HomeIcon from '../../general/HomeIcon';
+import ResumeButtons from '../ResumeButtons';
 
 export interface OzonProps {}
 
@@ -51,14 +52,7 @@ const Ozon: React.FC<OzonProps> = (props) => {
             </div>
 
             <div style={styles.resumeContainer}>
-                <a
-                    href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={styles.resumeLink}
-                >
-                    Резюме
-                </a>
+                <ResumeButtons />
             </div>
 
             <div style={styles.homeButtonContainer}>
@@ -95,12 +89,6 @@ const styles: StyleSheetCSS = {
     resumeContainer: {
         marginTop: 48,
         textAlign: 'center',
-    },
-    resumeLink: {
-        padding: 16,
-        fontSize: 18,
-        textDecoration: 'underline',
-        cursor: 'pointer',
     },
     homeButtonContainer: {
         marginTop: 32,

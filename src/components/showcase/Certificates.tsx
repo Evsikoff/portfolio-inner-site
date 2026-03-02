@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '../general/HomeIcon';
+import ResumeButtons from './ResumeButtons';
 
 // --- Статические импорты ---
 import img_395488 from '../../assets/pictures/evsikov/395488.png';
@@ -151,14 +152,7 @@ const Certificates: React.FC<CertificatesProps> = () => {
             </div>
 
             <div style={styles.resumeContainer}>
-                <a
-                    href="https://drive.google.com/file/d/1_k0-CzjtFo-6wZTFtNy8tK4UTZvVJ35d/view?usp=sharing"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={styles.resumeLink}
-                >
-                    Резюме
-                </a>
+                <ResumeButtons />
             </div>
         </div>
     );
@@ -201,14 +195,6 @@ const styles: Record<string, React.CSSProperties> = {
     resumeContainer: {
         marginTop: 80,
         textAlign: 'center',
-    },
-    resumeLink: {
-        padding: 16,
-        fontSize: 18,
-        textDecoration: 'underline',
-        cursor: 'pointer',
-        color: '#000',
-        fontWeight: 500,
     },
     homeButtonContainer: {
         marginTop: 0,
