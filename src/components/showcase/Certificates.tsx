@@ -196,14 +196,6 @@ const styles: Record<string, React.CSSProperties> = {
         marginTop: 80,
         textAlign: 'center',
     },
-    resumeLink: {
-        padding: 16,
-        fontSize: 18,
-        textDecoration: 'underline',
-        cursor: 'pointer',
-        color: '#000',
-        fontWeight: 500,
-    },
     homeButtonContainer: {
         marginTop: 0,
         marginBottom: 32,

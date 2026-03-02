@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from '../general';
-import { useNavigate } from 'react-router';
 import ResumeButtons from './ResumeButtons';
 
 export interface HomeProps {}

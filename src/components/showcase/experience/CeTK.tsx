@@ -49,7 +49,6 @@ const styles: StyleSheetCSS = {
     container: { maxHeight: '100%', overflowY: 'auto' },
     subtitle: { marginBottom: 32, marginTop: 8 },
     resumeContainer: { marginTop: 48, textAlign: 'center' },
-    resumeLink: { padding: 16, fontSize: 18, textDecoration: 'underline', cursor: 'pointer' },
     homeButtonContainer: { marginTop: 32, marginBottom: 32, display: 'flex', justifyContent: 'center', gap: 12 },
     homeButton: { padding: 12, minWidth: 64, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
 };

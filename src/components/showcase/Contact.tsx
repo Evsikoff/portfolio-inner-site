@@ -125,12 +125,6 @@ const styles: StyleSheetCSS = {
         marginTop: 48,
         textAlign: 'center',
     },
-    resumeLink: {
-        padding: 16,
-        fontSize: 18,
-        textDecoration: 'underline',
-        cursor: 'pointer',
-    },
     homeButtonContainer: {
         marginTop: 32,
         display: 'flex',
